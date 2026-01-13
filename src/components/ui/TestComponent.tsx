@@ -1,8 +1,10 @@
+import { GlassCard } from "./GlassCard";
+
 const TestComponent = () => {
   return (
-    <div className="bg-white/30 backdrop-blur-xs border border-white/40 rounded-xl p-7">
-      Glass content
-    </div>
+    <GlassCard className="w-full h-full items-center text-center p-6">
+      <h1>Glass content</h1>
+    </GlassCard>
   );
 };
 

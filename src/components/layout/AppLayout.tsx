@@ -1,11 +1,12 @@
 import { Outlet } from "react-router";
+import Sidebar from "../ui/Sidebar";
 
 export const AppLayout = () => {
   return (
     <div className="flex h-screen">
-      <div className="flex flex-col w-16 md:w-60 p-6">Sidebar</div>
+      <Sidebar />
 
-      <div className="flex flex-col items-center flex-1 overflow-hidden">
+      <div className="flex flex-col items-center flex-1 overflow-hidden mr-2 ">
         <header className="h-16 flex items-center px-6 mb-10">
           <h1 className="text-xl font-semibold">Main</h1>
         </header>
