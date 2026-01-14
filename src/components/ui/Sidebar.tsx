@@ -1,16 +1,19 @@
 import { NavLink } from "react-router";
 import { GlassCard } from "./GlassCard";
-
-const navItems = [
-  { path: "/", label: "Главная", icon: "🏠" },
-  { path: "/tasks", label: "Задачи", icon: "✅" },
-  { path: "/habits", label: "Привычки", icon: "🔁" },
-  { path: "/mood", label: "Настроение", icon: "😊" },
-  { path: "/journal", label: "Дневник", icon: "📓" },
-  { path: "/stats", label: "Статистика", icon: "📊" },
-];
+import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {
+  const { t } = useTranslation();
+
+  const navItems = [
+    { path: "/", label: t("dashboard"), icon: "🏠" },
+    { path: "/tasks", label: t("tasks"), icon: "✅" },
+    { path: "/habits", label: t("habits"), icon: "🔁" },
+    { path: "/mood", label: t("mood"), icon: "😊" },
+    { path: "/journal", label: t("journal"), icon: "📓" },
+    { path: "/stats", label: t("stats"), icon: "📊" },
+  ];
+
   return (
     <GlassCard
       className="w-16 md:w-60 flex flex-col self-center items-center justify-center md:items-start py-6 m-2 space-y-2 z-10 max-h-screen"
