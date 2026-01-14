@@ -1,0 +1,12 @@
+{
+  "hello": "Hello",
+  "dashboard": "Dashboard",
+  "tasks": "Tasks",
+  "habits": "Habits",
+  "mood": "Mood",
+  "journal": "Journal",
+  "stats": "Stats",
+  "settings": "Settings",
+  "changeLang": "Change language",
+  "locale": "en-US"
+}
