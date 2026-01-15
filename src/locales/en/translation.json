@@ -8,5 +8,6 @@
   "stats": "Stats",
   "settings": "Settings",
   "changeLang": "Change language",
+  "quickAddTaskPlaceholder": "Task for today?",
   "locale": "en-US"
 }
