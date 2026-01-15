@@ -1,4 +1,4 @@
-import { GlassCard } from "./ui/GlassCard";
+import { GlassCard } from "../components/ui/GlassCard";
 import { useTranslation } from "react-i18next";
 
 export default function DashboardPage() {

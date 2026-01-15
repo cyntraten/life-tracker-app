@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { GlassCard } from "./GlassCard";
+import { GlassCard } from "../ui/GlassCard";
 import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {

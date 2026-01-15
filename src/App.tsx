@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import DashboardPage from "./components/DashboardPage";
+import DashboardPage from "./pages/DashboardPage";
 import { AppLayout } from "./components/layout/AppLayout";
 
 function App() {
