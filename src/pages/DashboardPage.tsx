@@ -1,5 +1,6 @@
 import DashboardHello from "../components/dashboard/DashboardHello";
 import QuickAddTask from "../components/dashboard/QuickAddTask";
+import TodayTasks from "../components/dashboard/TodayTasks";
 import { GlassCard } from "../components/ui/GlassCard";
 
 export default function DashboardPage() {
@@ -10,6 +11,7 @@ export default function DashboardPage() {
       </div>
       <GlassCard className="flex flex-col mt-2 w-full p-6">
         <QuickAddTask />
+        <TodayTasks />
       </GlassCard>
     </div>
   );
