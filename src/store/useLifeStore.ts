@@ -22,12 +22,19 @@ type State = {
 type Action = {
   addTask: (task: Task) => void;
   addHabit: (habit: Habit) => void;
+  toggleTask: (id: string) => void;
 };
 
 const useLifeStore = create<State & Action>()((set) => ({
   tasks: [],
   habits: [],
   addTask: (task: Task) => set((state) => ({ tasks: [...state.tasks, task] })),
+  toggleTask: (id: string) =>
+    set((state) => ({
+      tasks: state.tasks.map((task) =>
+        task.id === id ? { ...task, done: !task.done } : task,
+      ),
+    })),
   addHabit: (habit: Habit) =>
     set((state) => ({ habits: [...state.habits, habit] })),
 }));
