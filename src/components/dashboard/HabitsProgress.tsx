@@ -24,7 +24,7 @@ export default function HabitsProgress() {
   return (
     <GlassCard className="p-4 mt-4">
       <h3 className="font-medium text-4xl mb-3 px-2">Привычки</h3>
-      {hasHabits ? (
+      {!hasHabits ? (
         <p className="text-gray-500 text-2xl px-2">Нет активных привычек</p>
       ) : (
         <div className="font-medium p-4">
