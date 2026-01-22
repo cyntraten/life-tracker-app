@@ -32,7 +32,6 @@ export default function TodayTasks() {
                 checked={task.done}
                 onChange={() => {
                   toggleTask(task.id);
-                  console.log(tasks);
                 }}
                 className="mr-3 w-5 h-5 rounded"
               />
