@@ -1,6 +1,6 @@
 import React from "react";
-import isSameDay from "../../../lib/utils";
 import HabitProgressCircle from "../../ui/HabitProgressCircle";
+import { isSameDay } from "../../../lib/utils";
 
 interface Props {
   lastCompleted: number;
