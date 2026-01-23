@@ -9,5 +9,8 @@
   "settings": "Settings",
   "changeLang": "Change language",
   "quickAddTaskPlaceholder": "Task for today?",
+  "upcomingEvents": "Upcoming",
+  "tomorrow": "Tomorrow",
+  "dayAfter": "Day after tomorrow",
   "locale": "en-US"
 }

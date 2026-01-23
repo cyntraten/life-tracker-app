@@ -9,5 +9,8 @@
   "settings": "Настройки",
   "changeLang": "Смена языка",
   "quickAddTaskPlaceholder": "Задача на сегодня?",
+  "upcomingEvents": "Ближайшие планы",
+  "tomorrow": "Завтра",
+  "dayAfter": "Послезавтра",
   "locale": "ru-RU"
 }
