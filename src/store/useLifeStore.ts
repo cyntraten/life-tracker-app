@@ -4,7 +4,7 @@ interface Task {
   id: string;
   title: string;
   done: boolean;
-  date: string;
+  timestamp: number;
 }
 
 interface Habit {
@@ -28,24 +28,71 @@ type Action = {
   cancelHabit: (id: string) => void;
 };
 
+// timestamps for testing
+const now = new Date();
+const todayStart = new Date(
+  now.getFullYear(),
+  now.getMonth(),
+  now.getDate(),
+).getTime();
+const tomorrowStart = new Date(
+  now.getFullYear(),
+  now.getMonth(),
+  now.getDate() + 1,
+).getTime();
+const dayAfterStart = new Date(
+  now.getFullYear(),
+  now.getMonth(),
+  now.getDate() + 2,
+).getTime();
+
 const useLifeStore = create<State & Action>()((set) => ({
   tasks: [
-    { id: "t1", title: "Задача 1", done: false, date: "1769078858742" },
-    { id: "t2", title: "Задача 2", done: false, date: "1669078858742" },
+    {
+      id: "t1",
+      title: "Купить продукты",
+      done: false,
+      timestamp: todayStart,
+    },
+    {
+      id: "t2",
+      title: "Позвонить врачу",
+      done: true,
+      timestamp: todayStart,
+    },
+    {
+      id: "t3",
+      title: "Сделать презентацию",
+      done: false,
+      timestamp: tomorrowStart,
+    },
+    {
+      id: "t4",
+      title: "Отправить отчёт",
+      done: false,
+      timestamp: dayAfterStart,
+    },
   ],
   habits: [
     {
-      id: "h1+555",
+      id: "h1",
       name: "Привычка 1",
       streak: 22,
-      lastCompleted: 1769078858742,
+      lastCompleted: todayStart - 24 * 3600 * 1000,
       progressPercent: 33,
     },
     {
       id: "h2",
       name: "Привычка 2",
+      streak: 11,
+      lastCompleted: todayStart,
+      progressPercent: 16,
+    },
+    {
+      id: "h3",
+      name: "Привычка 3",
       streak: 0,
-      lastCompleted: 1669078858742,
+      lastCompleted: 0,
       progressPercent: 0,
     },
   ],
