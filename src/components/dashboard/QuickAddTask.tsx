@@ -10,12 +10,12 @@ export default function QuickAddTask() {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && input.trim()) {
-      const currentDate = Date.now().toString();
+      const currentDate = Date.now();
       addTask({
         id: crypto.randomUUID(),
         title: input,
         done: false,
-        date: currentDate,
+        timestamp: currentDate,
       });
       setInput("");
     }

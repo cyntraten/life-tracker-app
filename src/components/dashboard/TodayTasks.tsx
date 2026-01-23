@@ -15,7 +15,8 @@ export default function TodayTasks() {
   );
   const tomorrowTimestamp = tomorrowStart.getTime();
   const todayTasks = tasks.filter(
-    (task) => +task.date >= todayTimestamp && +task.date < tomorrowTimestamp,
+    (task) =>
+      task.timestamp >= todayTimestamp && task.timestamp < tomorrowTimestamp,
   );
 
   return (
