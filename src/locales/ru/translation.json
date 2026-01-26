@@ -12,5 +12,9 @@
   "upcomingEvents": "Ближайшие планы",
   "tomorrow": "Завтра",
   "dayAfter": "Послезавтра",
+  "addTask": "Добавить задачу",
+  "taskName": "Название задачи",
+  "emptyTasksList": "Список задач пуст",
+  "today": "Сегодня",
   "locale": "ru-RU"
 }

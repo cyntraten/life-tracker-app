@@ -12,5 +12,9 @@
   "upcomingEvents": "Upcoming",
   "tomorrow": "Tomorrow",
   "dayAfter": "Day after tomorrow",
+  "addTask": "Add task",
+  "taskName": "Task title",
+  "emptyTasksList": "Tasks list is empty",
+  "today": "Today",
   "locale": "en-US"
 }
