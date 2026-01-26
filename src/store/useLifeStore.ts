@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
   done: boolean;
   timestamp: number;
 }
 
-interface Habit {
+export interface Habit {
   id: string;
   name: string;
   streak: number;
