@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router";
 import DashboardPage from "./pages/DashboardPage";
 import { AppLayout } from "./components/layout/AppLayout";
+import TaskPage from "./pages/TaskPage";
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <Route element={<AppLayout />}>
         <Route path="/" element={<DashboardPage />} />
         <Route path="/habits" element={<DashboardPage />} />
-        <Route path="/tasks" element={<DashboardPage />} />
+        <Route path="/tasks" element={<TaskPage />} />
         <Route path="/mood" element={<DashboardPage />} />
         <Route path="/journal" element={<DashboardPage />} />
         <Route path="/stats" element={<DashboardPage />} />
