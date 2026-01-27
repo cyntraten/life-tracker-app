@@ -13,7 +13,7 @@ export default function TaskPage() {
       </GlassCard>
 
       <GlassCard className="p-4 mt-4">
-        <h2 className="text-2xl font-medium mb-4">Все задачи</h2>
+        <h2 className="text-2xl font-medium mb-4">{t("allTasks")}</h2>
         <TaskList />
       </GlassCard>
     </div>
