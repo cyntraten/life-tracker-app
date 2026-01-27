@@ -2,6 +2,7 @@
   "hello": "Hello",
   "dashboard": "Dashboard",
   "tasks": "Tasks",
+  "habit": "Habit",
   "habits": "Habits",
   "mood": "Mood",
   "journal": "Journal",
@@ -13,8 +14,10 @@
   "tomorrow": "Tomorrow",
   "dayAfter": "Day after tomorrow",
   "addTask": "Add task",
+  "allTasks": "All tasks",
   "taskName": "Task title",
   "emptyTasksList": "Tasks list is empty",
   "today": "Today",
+  "addHabit": "Add habit",
   "locale": "en-US"
 }

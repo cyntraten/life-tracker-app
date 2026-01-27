@@ -2,6 +2,7 @@
   "hello": "Привет",
   "dashboard": "Главная",
   "tasks": "Задачи",
+  "habit": "Привычка",
   "habits": "Привычки",
   "mood": "Настроение",
   "journal": "Дневник",
@@ -13,8 +14,10 @@
   "tomorrow": "Завтра",
   "dayAfter": "Послезавтра",
   "addTask": "Добавить задачу",
+  "allTasks": "Все задачи",
   "taskName": "Название задачи",
   "emptyTasksList": "Список задач пуст",
   "today": "Сегодня",
+  "addHabit": "Добавить привычку",
   "locale": "ru-RU"
 }
