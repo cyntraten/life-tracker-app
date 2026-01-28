@@ -39,3 +39,29 @@ export function formatEventDate(timestamp: number): string {
 
   return `${day}.${month}.${year}`;
 }
+
+export function getWeekStartTimestamp(): number {
+  const now = new Date();
+  const day = now.getDay();
+  const diffToMonday = day === 0 ? -6 : 1 - day;
+
+  const weekStart = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + diffToMonday,
+  );
+
+  return weekStart.getTime();
+}
+
+export function getWeekEndTimestamp(weekStartTimestamp: number): number {
+  const weekStart = new Date(weekStartTimestamp);
+
+  const weekEnd = new Date(
+    weekStart.getFullYear(),
+    weekStart.getMonth(),
+    weekStart.getDate() + 7,
+  );
+
+  return weekEnd.getTime();
+}
