@@ -7,6 +7,13 @@ export interface Task {
   timestamp: number;
 }
 
+export interface Mood {
+  id: string;
+  note?: string;
+  mood: number;
+  timestamp: number;
+}
+
 export interface Habit {
   id: string;
   name: string;
@@ -18,6 +25,7 @@ export interface Habit {
 type State = {
   tasks: Task[];
   habits: Habit[];
+  moods: Mood[];
 };
 
 type Action = {
@@ -26,6 +34,7 @@ type Action = {
   toggleTask: (id: string) => void;
   doneHabit: (id: string, timestamp: number) => void;
   cancelHabit: (id: string) => void;
+  addMood: (mood: Mood) => void;
 };
 
 // timestamps for testing
@@ -96,6 +105,26 @@ const useLifeStore = create<State & Action>()((set) => ({
       progressPercent: 0,
     },
   ],
+  moods: [
+    {
+      id: "m1",
+      note: "Круто",
+      mood: 5,
+      timestamp: todayStart,
+    },
+    {
+      id: "m2",
+      note: "Плохо",
+      mood: 1,
+      timestamp: tomorrowStart,
+    },
+    {
+      id: "m3",
+      note: "Средне",
+      mood: 3,
+      timestamp: dayAfterStart,
+    },
+  ],
   addTask: (task: Task) => set((state) => ({ tasks: [...state.tasks, task] })),
   toggleTask: (id: string) =>
     set((state) => ({
@@ -134,6 +163,7 @@ const useLifeStore = create<State & Action>()((set) => ({
           : habit,
       ),
     })),
+  addMood: (mood: Mood) => set((state) => ({ moods: [...state.moods, mood] })),
 }));
 
 export default useLifeStore;
