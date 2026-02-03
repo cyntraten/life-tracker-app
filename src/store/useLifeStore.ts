@@ -35,6 +35,7 @@ type Action = {
   doneHabit: (id: string, timestamp: number) => void;
   cancelHabit: (id: string) => void;
   addMood: (mood: Mood) => void;
+  updateMood: (mood: Mood) => void;
 };
 
 // timestamps for testing
@@ -164,6 +165,18 @@ const useLifeStore = create<State & Action>()((set) => ({
       ),
     })),
   addMood: (mood: Mood) => set((state) => ({ moods: [...state.moods, mood] })),
+  updateMood: (mood: Mood) =>
+    set((state) => ({
+      moods: state.moods.map((m) =>
+        m.id === mood.id
+          ? {
+              ...m,
+              mood: mood.mood,
+              note: mood.note,
+            }
+          : m,
+      ),
+    })),
 }));
 
 export default useLifeStore;
