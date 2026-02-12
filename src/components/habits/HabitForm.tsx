@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 
 export default function HabitForm() {
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
 
   const { t } = useTranslation();
 
@@ -12,7 +11,7 @@ export default function HabitForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || !date) return;
+    if (!title.trim()) return;
 
     const habit: Habit = {
       id: crypto.randomUUID(),
@@ -21,10 +20,8 @@ export default function HabitForm() {
       lastCompleted: 0,
       progressPercent: 0,
     };
-
     addHabit(habit);
     setTitle("");
-    setDate("");
   };
 
   return (
@@ -35,6 +32,7 @@ export default function HabitForm() {
         onChange={(e) => setTitle(e.target.value)}
         placeholder={t("habit")}
         className="w-full bg-transparent outline-none placeholder-gray-400 py-2"
+        name="habitName"
         required
       />
       <button
