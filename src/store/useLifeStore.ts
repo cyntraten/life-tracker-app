@@ -28,7 +28,7 @@ type State = {
   moods: Mood[];
 };
 
-type Action = {
+interface Actions {
   addTask: (task: Task) => void;
   addHabit: (habit: Habit) => void;
   toggleTask: (id: string) => void;
@@ -36,7 +36,9 @@ type Action = {
   cancelHabit: (id: string) => void;
   addMood: (mood: Mood) => void;
   updateMood: (mood: Mood) => void;
-};
+}
+
+type LifeStore = State & Actions;
 
 // timestamps for testing
 const now = new Date();
@@ -56,7 +58,24 @@ const dayAfterStart = new Date(
   now.getDate() + 2,
 ).getTime();
 
-const useLifeStore = create<State & Action>()((set) => ({
+const calculateProgressPercent = (streak: number): number =>
+  Math.min(Math.floor(streak / 0.66), 100);
+
+const updateHabitOnDone = (habit: Habit, timestamp: number): Habit => ({
+  ...habit,
+  streak: habit.streak + 1,
+  lastCompleted: timestamp,
+  progressPercent: calculateProgressPercent(Math.max(habit.streak + 1)),
+});
+
+const updateHabitOnCancel = (habit: Habit): Habit => ({
+  ...habit,
+  streak: Math.max(habit.streak - 1, 0),
+  lastCompleted: 0,
+  progressPercent: calculateProgressPercent(Math.max(habit.streak - 1, 0)),
+});
+
+const useLifeStore = create<LifeStore>()((set) => ({
   tasks: [
     {
       id: "t1",
@@ -135,33 +154,16 @@ const useLifeStore = create<State & Action>()((set) => ({
     })),
   addHabit: (habit: Habit) =>
     set((state) => ({ habits: [...state.habits, habit] })),
-  doneHabit: (id: string, timestamp: number) =>
+  doneHabit: (id: string) =>
     set((state) => ({
       habits: state.habits.map((habit) =>
-        habit.id === id
-          ? {
-              ...habit,
-              streak: habit.streak + 1,
-              lastCompleted: timestamp,
-              progressPercent: Math.floor((habit.streak + 1) / 0.66),
-            }
-          : habit,
+        habit.id === id ? updateHabitOnDone(habit, Date.now()) : habit,
       ),
     })),
   cancelHabit: (id: string) =>
     set((state) => ({
       habits: state.habits.map((habit) =>
-        habit.id === id
-          ? {
-              ...habit,
-              streak: Math.max(habit.streak - 1, 0),
-              lastCompleted: 0,
-              progressPercent: Math.max(
-                Math.floor((habit.streak - 1) / 0.66),
-                0,
-              ),
-            }
-          : habit,
+        habit.id === id ? updateHabitOnCancel(habit) : habit,
       ),
     })),
   addMood: (mood: Mood) => set((state) => ({ moods: [...state.moods, mood] })),
