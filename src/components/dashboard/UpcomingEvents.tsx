@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { formatEventDate } from "../../lib/utils";
+import { formatEventDate, getStartOfDayTimestamp } from "../../lib/utils";
 import useLifeStore from "../../store/useLifeStore";
 import { GlassCard } from "../ui/GlassCard";
 
@@ -7,17 +7,8 @@ export default function UpcomingEvents() {
   const { tasks } = useLifeStore();
   const { t } = useTranslation();
 
-  const now = new Date();
-  const startOfTomorrow = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate() + 1,
-  ).getTime();
-  const startOfThreeDaysLater = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate() + 3,
-  ).getTime();
+  const startOfTomorrow = getStartOfDayTimestamp(1);
+  const startOfThreeDaysLater = getStartOfDayTimestamp(3);
 
   const upcomingTasks = tasks
     .filter(
