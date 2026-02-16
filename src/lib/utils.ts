@@ -65,3 +65,14 @@ export function getWeekEndTimestamp(weekStartTimestamp: number): number {
 
   return weekEnd.getTime();
 }
+
+export function getStartOfDayTimestamp(daysOffset: number): number {
+  const date = new Date();
+  const currentDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate() + daysOffset,
+  ).getTime();
+
+  return currentDate;
+}
