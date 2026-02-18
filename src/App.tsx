@@ -4,6 +4,7 @@ import { AppLayout } from "./components/layout/AppLayout";
 import TaskPage from "./pages/TaskPage";
 import HabitsPage from "./pages/HabitsPage";
 import MoodPage from "./pages/MoodPage";
+import StatsPage from "./pages/StatsPage";
 
 function App() {
   return (
@@ -13,8 +14,7 @@ function App() {
         <Route path="/habits" element={<HabitsPage />} />
         <Route path="/tasks" element={<TaskPage />} />
         <Route path="/mood" element={<MoodPage />} />
-        <Route path="/journal" element={<DashboardPage />} />
-        <Route path="/stats" element={<DashboardPage />} />
+        <Route path="/stats" element={<StatsPage />} />
       </Route>
     </Routes>
   );
