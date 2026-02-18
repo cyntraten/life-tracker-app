@@ -10,7 +10,6 @@ export default function Sidebar() {
     { path: "/tasks", label: t("tasks"), icon: "✅" },
     { path: "/habits", label: t("habits"), icon: "🔁" },
     { path: "/mood", label: t("mood"), icon: "😊" },
-    { path: "/journal", label: t("journal"), icon: "📓" },
     { path: "/stats", label: t("stats"), icon: "📊" },
   ];
 
