@@ -26,5 +26,8 @@
   "friday": "Friday",
   "saturday": "Saturday",
   "sunday": "Sunday",
+  "averageStreak": "Average streak",
+  "weeklyMoodAverage": "Average mood",
+  "completed": "Completed",
   "locale": "en-US"
 }

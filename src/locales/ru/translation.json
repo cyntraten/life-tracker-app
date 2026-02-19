@@ -26,5 +26,8 @@
   "friday": "Пятница",
   "saturday": "Суббота",
   "sunday": "Воскресенье",
+  "averageStreak": "Средняя цепочка",
+  "weeklyMoodAverage": "Среднее настроение за неделю",
+  "completed": "Выполнено",
   "locale": "ru-RU"
 }
