@@ -36,7 +36,11 @@ function getCompletedPercentTasks(
   return Math.floor(completedTasks / (numberOfTasks / 100));
 }
 
-export function getTasksStats(tasks: Task[]) {
+export function getTasksStats(tasks: Task[]): {
+  numberOfTasks: number;
+  completedTasks: number;
+  completedPercent: number;
+} {
   const numberOfTasks = tasks.length;
   const completedTasks = getCompletedTasks(tasks);
   const completedPercent = getCompletedPercentTasks(
