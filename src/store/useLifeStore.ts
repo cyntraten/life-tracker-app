@@ -26,9 +26,13 @@ type State = {
   tasks: Task[];
   habits: Habit[];
   moods: Mood[];
+  loadingTasks: boolean;
+  // loadingHabits: boolean;
+  // loadingMoods: boolean;
 };
 
 interface Actions {
+  loadTasksFromDB: () => Promise<void>;
   addTask: (task: Task) => void;
   addHabit: (habit: Habit) => void;
   toggleTask: (id: string) => void;
@@ -76,6 +80,17 @@ const updateHabitOnCancel = (habit: Habit): Habit => ({
 });
 
 const useLifeStore = create<LifeStore>()((set) => ({
+  loadTasksFromDB: async () => {
+    try {
+      const res = await fetch("/api/tasks");
+      if (!res.ok) throw new Error("Failed to load tasks from DB");
+      const tasks: Task[] = await res.json();
+      set({ tasks, loadingTasks: false });
+    } catch (err: any) {
+      console.error(err);
+    }
+  },
+  loadingTasks: true,
   tasks: [
     {
       id: "t1",
