@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { GlassCard } from "../ui/GlassCard";
 import { useState } from "react";
-import useLifeStore from "../../store/useLifeStore";
+import useTaskStore from "../../store/useTaskStore";
 
 export default function QuickAddTask() {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
-  const addTask = useLifeStore((state) => state.addTask);
+  const addTask = useTaskStore((state) => state.addTaskToDB);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && input.trim()) {

@@ -1,9 +1,10 @@
-import useLifeStore from "../../store/useLifeStore";
+import { useEffect } from "react";
+import useTaskStore from "../../store/useTaskStore";
 import { GlassCard } from "../ui/GlassCard";
 
 export default function TodayTasks() {
-  const { tasks, toggleTask } = useLifeStore();
-
+  const { tasks, updateTaskFromDB, loadTasksFromDB, loadingTasks } =
+    useTaskStore();
   const now = new Date();
   const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const todayTimestamp = todayStart.getTime();
@@ -19,11 +20,27 @@ export default function TodayTasks() {
       task.timestamp >= todayTimestamp && task.timestamp < tomorrowTimestamp,
   );
 
+  useEffect(() => {
+    loadTasksFromDB();
+  }, [loadTasksFromDB]);
+
   return (
     <GlassCard className="p-4 mt-4">
       <h3 className="font-medium text-4xl mb-3 px-2">Сегодня</h3>
       {todayTasks.length === 0 ? (
         <p className="text-gray-500 text-2xl px-2">Нет задач на сегодня</p>
+      ) : loadingTasks ? (
+        <div className="font-medium p-4">
+          <div className="mt-3">
+            <div className="animate-pulse">
+              <div className="flex-col items-center justify-between">
+                <div className="mt-4 w-5 h-5 bg-gray-300 rounded w-full"></div>
+                <div className="mt-4 w-5 h-5 bg-gray-300 rounded w-full"></div>
+                <div className="mt-4 w-5 h-5 bg-gray-300 rounded w-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="font-medium p-4">
           {todayTasks.map((task) => (
@@ -32,7 +49,12 @@ export default function TodayTasks() {
                 type="checkbox"
                 checked={task.done}
                 onChange={() => {
-                  toggleTask(task.id);
+                  updateTaskFromDB(task.id, {
+                    id: task.id,
+                    title: task.title,
+                    done: !task.done,
+                    timestamp: task.timestamp,
+                  });
                 }}
                 className="mr-3 w-5 h-5 rounded"
               />

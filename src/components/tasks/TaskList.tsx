@@ -1,21 +1,22 @@
 import { useTranslation } from "react-i18next";
-import useLifeStore from "../../store/useLifeStore";
 import { formatEventDate } from "../../lib/utils";
 import { useEffect } from "react";
+import useTaskStore from "../../store/useTaskStore";
 
 export default function TaskList() {
-  const { tasks, toggleTask, loadTasksFromDB, loadingTasks } = useLifeStore();
+  const { tasks, loadTasksFromDB, loadingTasks, updateTaskFromDB } =
+    useTaskStore();
   const { t } = useTranslation();
 
   const sortedTasks = [...tasks].sort((t1, t2) => t1.timestamp - t2.timestamp);
 
+  useEffect(() => {
+    loadTasksFromDB();
+  }, [loadTasksFromDB]);
+
   if (sortedTasks.length === 0) {
     return <p className="text-gray-500">{t("emptyTasksList")}</p>;
   }
-
-  useEffect(() => {
-    useLifeStore.getState().loadTasksFromDB();
-  }, [loadTasksFromDB]);
 
   if (loadingTasks) {
     return (
@@ -39,7 +40,14 @@ export default function TaskList() {
                 <input
                   type="checkbox"
                   checked={task.done}
-                  onChange={() => toggleTask(task.id)}
+                  onChange={() =>
+                    updateTaskFromDB(task.id, {
+                      id: task.id,
+                      title: task.title,
+                      done: !task.done,
+                      timestamp: task.timestamp,
+                    })
+                  }
                   className="mr-3 w-4 h-4 rounded text-blue-500"
                 />
                 <span className={task.done ? "line-through text-gray-400" : ""}>

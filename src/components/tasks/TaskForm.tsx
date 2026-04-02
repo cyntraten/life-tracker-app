@@ -1,6 +1,6 @@
 import { useState } from "react";
-import useLifeStore, { type Task } from "../../store/useLifeStore";
 import { useTranslation } from "react-i18next";
+import useTaskStore, { type Task } from "../../store/useTaskStore";
 
 export default function TaskForm() {
   const [title, setTitle] = useState("");
@@ -8,9 +8,9 @@ export default function TaskForm() {
 
   const { t } = useTranslation();
 
-  const addTask = useLifeStore((state) => state.addTask);
+  const addTaskToDB = useTaskStore((state) => state.addTaskToDB);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !date) return;
 
@@ -28,7 +28,7 @@ export default function TaskForm() {
       timestamp: timestamp,
     };
 
-    addTask(task);
+    await addTaskToDB(task);
     setTitle("");
     setDate("");
   };
