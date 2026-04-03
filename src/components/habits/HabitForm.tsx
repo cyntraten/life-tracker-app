@@ -1,15 +1,15 @@
 import { useState } from "react";
-import useLifeStore, { type Habit } from "../../store/useLifeStore";
 import { useTranslation } from "react-i18next";
+import useHabitStore, { type Habit } from "../../store/useHabitStore";
 
 export default function HabitForm() {
   const [title, setTitle] = useState("");
 
   const { t } = useTranslation();
 
-  const { addHabit } = useLifeStore();
+  const { addHabitToDB } = useHabitStore();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim()) return;
 
@@ -20,7 +20,7 @@ export default function HabitForm() {
       lastCompleted: 0,
       progressPercent: 0,
     };
-    addHabit(habit);
+    await addHabitToDB(habit);
     setTitle("");
   };
 

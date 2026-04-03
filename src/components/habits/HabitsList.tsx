@@ -1,31 +1,56 @@
 import { useTranslation } from "react-i18next";
-import useLifeStore from "../../store/useLifeStore";
 import HabitItem from "../dashboard/habit/HabitItem";
-import { useCallback } from "react";
+import { useCallback, useEffect, useMemo } from "react";
+import useHabitStore from "../../store/useHabitStore";
+import type { Habit } from "../../store/useLifeStore";
 
 export default function HabitsList() {
-  const { habits, cancelHabit, doneHabit } = useLifeStore();
+  const {
+    habits,
+    cancelHabitFromDB,
+    doneHabitFromDB,
+    loadHabitsFromDB,
+    loadingHabits,
+  } = useHabitStore();
   const { t } = useTranslation();
-  const todayTimestamp = Date.now();
+  const todayTimestamp = useMemo(() => Date.now(), []);
+
+  const handleCheckboxChange = useCallback(
+    (habitId: string, isDoneToday: boolean, updatedData: Habit) => {
+      if (isDoneToday) {
+        cancelHabitFromDB(habitId, updatedData);
+        return;
+      }
+      doneHabitFromDB(habitId, updatedData);
+    },
+    [cancelHabitFromDB, doneHabitFromDB, todayTimestamp],
+  );
 
   const sortedHabits = [...habits].sort(
     (t1, t2) => t1.lastCompleted - t2.lastCompleted,
   );
 
+  useEffect(() => {
+    loadHabitsFromDB();
+  }, [loadHabitsFromDB]);
+
   if (sortedHabits.length === 0) {
     return <p className="text-gray-500">{t("emptyTasksList")}</p>;
   }
 
-  const handleCheckboxChange = useCallback(
-    (habitId: string, isDoneToday: boolean) => {
-      if (isDoneToday) {
-        cancelHabit(habitId);
-        return;
-      }
-      doneHabit(habitId, todayTimestamp);
-    },
-    [cancelHabit, doneHabit],
-  );
+  if (loadingHabits) {
+    return (
+      <div className="mt-3">
+        <div className="animate-pulse">
+          <div className="flex-col items-center justify-between">
+            <div className="mt-4 h-4 bg-gray-300 rounded w-full"></div>
+            <div className="mt-4 h-4 bg-gray-300 rounded w-full"></div>
+            <div className="mt-4 h-4 bg-gray-300 rounded w-full"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-3">
@@ -39,6 +64,13 @@ export default function HabitsList() {
             lastCompleted={habit.lastCompleted}
             habitId={habit.id}
             progressPercent={habit.progressPercent}
+            updatedData={{
+              id: habit.id,
+              name: habit.name,
+              lastCompleted: habit.lastCompleted,
+              streak: habit.streak,
+              progressPercent: habit.progressPercent,
+            }}
           />
         ))}
       </div>

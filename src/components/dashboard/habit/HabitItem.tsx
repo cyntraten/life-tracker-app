@@ -1,14 +1,20 @@
 import React from "react";
 import HabitProgressCircle from "../../ui/HabitProgressCircle";
 import { isSameDay } from "../../../lib/utils";
+import type { Habit } from "../../../store/useHabitStore";
 
 interface Props {
   lastCompleted: number;
   name: string;
   todayTimestamp: number;
   habitId: string;
-  checkboxToggle: (id: string, isDoneToday: boolean) => void;
+  checkboxToggle: (
+    id: string,
+    isDoneToday: boolean,
+    updatedData: Habit,
+  ) => void;
   progressPercent: number;
+  updatedData: Habit;
 }
 
 export default React.memo(function HabitItem({
@@ -18,6 +24,7 @@ export default React.memo(function HabitItem({
   habitId,
   checkboxToggle,
   progressPercent,
+  updatedData,
 }: Props) {
   const isDoneToday = isSameDay(lastCompleted, todayTimestamp);
   return (
@@ -26,7 +33,7 @@ export default React.memo(function HabitItem({
         type="checkbox"
         checked={isDoneToday}
         onChange={() => {
-          checkboxToggle(habitId, isDoneToday);
+          checkboxToggle(habitId, isDoneToday, updatedData);
         }}
         className="mr-3 w-5 h-5 rounded"
       />
