@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { getAverageHabitsStreak } from "../../lib/stats";
-import useLifeStore from "../../store/useLifeStore";
 import { GlassCard } from "../ui/GlassCard";
+import useHabitStore from "../../store/useHabitStore";
 
 export default function HabitsStats() {
-  const { habits } = useLifeStore();
+  const { habits } = useHabitStore();
   const { t } = useTranslation();
   const averageHabitsStreak = getAverageHabitsStreak(habits);
 

@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { getAverageMood } from "../../lib/stats";
-import useLifeStore from "../../store/useLifeStore";
 import { GlassCard } from "../ui/GlassCard";
+import useMoodStore from "../../store/useMoodStore";
 
 const MOODS = ["", "😞", "😕", "😐", "🙂", "😊"];
 
 export default function MoodsStats() {
-  const { moods } = useLifeStore();
+  const { moods } = useMoodStore();
   const averageMood = getAverageMood(moods);
   const { t } = useTranslation();
 
