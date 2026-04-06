@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GlassCard } from "../ui/GlassCard";
-import useLifeStore from "../../store/useLifeStore";
+import useMoodStore from "../../store/useMoodStore";
 
 const MOODS = [
   { emoji: "😞", label: "Очень плохо", number: 1 },
@@ -13,7 +13,7 @@ const MOODS = [
 export default function SelectMood() {
   const [selectedMood, setSelectedMood] = useState(0);
   const [note, setNote] = useState("");
-  const { moods, addMood, updateMood } = useLifeStore();
+  const { moods, addMoodToDB, updateMoodFromDB } = useMoodStore();
 
   const currentTime = new Date();
   const currentTimestamp = currentTime.getTime();
@@ -44,15 +44,16 @@ export default function SelectMood() {
     const todayMood = moods.find(
       (mood) => mood.timestamp >= todayStart && mood.timestamp < dayEnd,
     );
+    const updatedMood = {
+      ...todayMood,
+      mood: selectedMood,
+      note,
+    };
 
     if (todayMood) {
-      updateMood({
-        ...todayMood,
-        mood: selectedMood,
-        note,
-      });
+      updateMoodFromDB(todayMood.id, updatedMood);
     } else {
-      addMood({
+      addMoodToDB({
         id: crypto.randomUUID(),
         mood: selectedMood,
         note,
